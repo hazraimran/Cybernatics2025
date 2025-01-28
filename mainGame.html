@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cybernetic Sabotage</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <style>
+    #endGame{
+      background-color: red;
+      color: white;
+      border-color: white;
+      transition: color .3s linear,background-color .3s linear,border-color .3s linear;
+    }
+    #endGame:hover{
+      background-color: white;
+      color:red;
+      border-color: white;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="main-panel">
+        <div class="main-panel-container">
+          <div class="main-panel-content">
+            <div class="display-text"></div>
+          </div>
+
+          <div class="input-box">
+            <form id="query-form" name="query-input">
+              <div class="input-container">
+                <textarea
+                  id="query-textarea"
+                  rows="8"
+                  placeholder="Enter your SQL query here"
+                  name="query-input-box"
+                ></textarea>
+                <button type="submit" id="submit-button">Submit</button>
+              </div>
+            </form>
+          </div>
+          <div class="hint-container"></div>
+        </div>
+      </div>
+
+      <div id="hint-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p id="modal-content">Some text in the Modal..</p>
+          <button id="yes">Yes</button>
+          <button id="no">No</button>
+          <button id="okay">Okay</button>
+        </div>
+      </div>
+
+      <div class="side-panel">
+        <div class="side-panel-content">
+          <h2>Cybernetic Sabotage</h2>
+
+          <div class="button-container">
+            <button id="restart-button">Restart</button>
+            <button type="hint" id="hint-button">Hint</button>
+            <button id="settings-button">Settings</button>
+            <button id="endGame" onclick="endGame()">EndGame</button>
+          </div>
+
+          <div id="sound-modal" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="toggleSound()">&times;</span>
+              <p>Sound Options</p>
+              <button id="sound-on-button">Sound On</button>
+              <button id="sound-off-button">Sound Off</button>
+            </div>
+          </div>
+
+          <div class="info-container">
+            <div id="timer">Time: 0s</div>
+            <div id="score">Score: 150</div>
+            <div id="correct-queries">Q: 0 / 12</div>
+          </div>
+
+          <div class="progress-container">
+            <span>Progress</span>
+            <div id="progress-bar-container">
+              <div id="progress-bar">
+                <span id="progress-text"></span>
+              </div>
+            </div>
+          </div>
+
+          <table>
+            <tr>
+              <th colspan="2">Database Schema</th>
+            </tr>
+            <tr>
+              <td>Employee</td>
+              <td>EmployeeID, Name, JobRole, Department, LastLoginTime</td>
+            </tr>
+            <tr>
+              <td>Robot</td>
+              <td>
+                RobotID, Model, ManufDate, Status, lastUpdateOn, LastUpdatedByEmpID
+              </td>
+            </tr>
+            <tr>
+              <td>Log</td>
+              <td>
+                LogID, EmployeeID, ActionDesc, Timestamp, RobotID
+              </td>
+            </tr>
+            <tr>
+              <td>Incident</td>
+              <td>IncidentID, Desc, Timestamp, RobotID, Reported By</td>
+            </tr>
+            <tr>
+              <td>AccessCode</td>
+              <td>AccessCode, EmployeeID, AccessLevel, LastAccess</td>
+            </tr>
+          </table>
+
+          <div class="inner-box-side">
+            <h3>Trinity</h3>
+            <p id="trinity-text">Trinity Speech Text</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <audio
+      id="correct-sound"
+      src="audio/mixkit-correct-answer-tone-2870.wav"
+    ></audio>
+    <audio
+      id="incorrect-sound"
+      src="audio/mixkit-failure-arcade-alert-notification-240.wav"
+    ></audio>
+    <script src="sql-wasm.js" type="text/javascript"></script>
+    <script src="main.js" type="text/javascript"></script>
+  </body>
+</html>
